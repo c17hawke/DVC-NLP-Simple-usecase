@@ -1,7 +1,12 @@
 ### dependency
 tqdm
 dvc
-
+pandas
+numpy
+Scipy
+pyyaml
+scikit-learn
+lxml
 
 ### local packages -
-# -e . # << uncomment this to install from setup.py
+-e . # << uncomment this to install from setup.py
