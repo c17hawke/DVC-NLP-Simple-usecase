@@ -2,10 +2,11 @@
 DVC NLP project
 
 ## Reference repository:
-[official reference repo](https://github.com/iterative/example-get-started)
-[DVC STUDIO](https://studio.iterative.ai/)
+* [official reference repo](https://github.com/iterative/example-get-started)
 
-[MY View](https://studio.iterative.ai/user/c17hawke/views/DVC-NLP-Simple-usecase-3xolnsi26a)
+* [DVC STUDIO](https://studio.iterative.ai/)
+
+* [MY View](https://studio.iterative.ai/user/c17hawke/views/DVC-NLP-Simple-usecase-3xolnsi26a)
 
 ## STEPS -
 
