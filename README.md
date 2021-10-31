@@ -8,6 +8,11 @@ DVC NLP project
 
 * [MY View](https://studio.iterative.ai/user/c17hawke/views/DVC-NLP-Simple-usecase-3xolnsi26a)
 
+* [Bag of Words- Krish Naik](https://youtu.be/D2V1okCEsiE)
+
+* [TF-IDF- Krish Naik](https://youtu.be/D2V1okCEsiE)
+
+
 ## STEPS -
 
 ### STEP 01- Create a repository by using template repository
@@ -48,8 +53,12 @@ dvc init
 
 ### extra commands - 
 
+```bash
 echo "*.log" >> logs/.gitignore
+```
 
+```bash
 git rm --cached logs/running_logs.log
+```
 
 updated by rohan 
