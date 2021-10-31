@@ -1,7 +1,7 @@
 # add stages here 
 stages:
   prepare_data:
-    cmd: python src/stage_01_prepare.py
+    cmd: python src/stage_01_prepare.py --config=configs/config.yaml --params=params.yaml
     deps:
       - src/stage_01_prepare.py
       - data/data.xml
@@ -14,3 +14,19 @@ stages:
     outs:
       - artifacts/prepared/train.tsv
       - artifacts/prepared/test.tsv
+
+  featurize:
+    cmd: python src/stage_02_featurization.py --config=configs/config.yaml --params=params.yaml
+    deps:
+      - src/stage_02_featurization.py
+      - artifacts/prepared/train.tsv
+      - artifacts/prepared/test.tsv
+      - src/utils/common.py
+      - src/utils/featurize.py
+      - configs/config.yaml
+    params:
+      - featurize.max_features
+      - featurize.ngrams
+    outs:
+      - artifacts/features/train.pkl
+      - artifacts/features/test.pkl
