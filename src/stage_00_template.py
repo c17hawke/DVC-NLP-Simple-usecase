@@ -13,7 +13,7 @@ logging.basicConfig(
     filemode="a"
     )
 
-def main(config_path):
+def main(config_path, params_path):
     pass
 
 if __name__ == '__main__':
