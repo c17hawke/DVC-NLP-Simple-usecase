@@ -34,11 +34,11 @@ def main(config_path):
     model = joblib.load(model_path)
     matrix = joblib.load(featurized_test_data_path)
 
-    labels = matrix[:, 1].toarray()
+    labels = np.squeeze(matrix[:, 1].toarray())
     X = matrix[:,2:]
 
     predictions_by_class = model.predict_proba(X)
-    predictions = predictions_by_class[: 1]
+    predictions = predictions_by_class[:, 1]
 
     PRC_json_path = config["plots"]["PRC"]
     ROC_json_path = config["plots"]["ROC"]
