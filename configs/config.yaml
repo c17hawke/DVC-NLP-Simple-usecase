@@ -8,7 +8,8 @@ artifacts:
   FEATURIZED_DATA: features
   FEATURIZED_OUT_TRAIN: train.pkl
   FEATURIZED_OUT_TEST: test.pkl
-
+  MODEL_DIR: model
+  MODEL_NAME: model.pkl
 
 
 source_data:
