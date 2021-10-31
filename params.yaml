@@ -4,10 +4,10 @@ prepare:
   seed: 2021
 
 featurize:
-  max_features: 3000
-  ngrams: 2
+  max_features: 2000
+  ngrams: 3
 
 train:
   seed: 2021
-  n_est: 100
-  min_split: 16
+  n_est: 70
+  min_split: 8

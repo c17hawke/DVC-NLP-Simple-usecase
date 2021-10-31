@@ -52,21 +52,21 @@ stages:
       size: 516
     params:
       params.yaml:
-        featurize.max_features: 3000
-        featurize.ngrams: 2
+        featurize.max_features: 2000
+        featurize.ngrams: 3
     outs:
     - path: artifacts/features/test.pkl
-      md5: 81164fa4daecfc05da4ad928f4144482
-      size: 2597441
+      md5: 1e8032db1436184d5d93a0bf85fb419c
+      size: 2492225
     - path: artifacts/features/train.pkl
-      md5: 30c0f34f19273c212412655d72e44c2a
-      size: 10134729
+      md5: 3b2b114f60736f0c05a0989c6c61bef2
+      size: 9712665
   train:
     cmd: python src/stage_03_train.py --config=configs/config.yaml --params=params.yaml
     deps:
     - path: artifacts/features/train.pkl
-      md5: 30c0f34f19273c212412655d72e44c2a
-      size: 10134729
+      md5: 3b2b114f60736f0c05a0989c6c61bef2
+      size: 9712665
     - path: configs/config.yaml
       md5: 2f06fa75d45cd5316539b1631480774b
       size: 450
@@ -78,24 +78,24 @@ stages:
       size: 979
     params:
       params.yaml:
-        train.min_split: 16
-        train.n_est: 100
+        train.min_split: 8
+        train.n_est: 70
         train.seed: 2021
     outs:
     - path: artifacts/model/model.pkl
-      md5: 346085e40b8cf0389f3bb3fbb5690882
-      size: 3553847
+      md5: 95e4d3396776b56cf4b2d1fb47ed937c
+      size: 2934503
   run_plots_command:
     cmd: dvc plots diff
   evaluate:
     cmd: python src/stage_04_evaluate.py --config=configs/config.yaml
     deps:
     - path: artifacts/features/test.pkl
-      md5: 81164fa4daecfc05da4ad928f4144482
-      size: 2597441
+      md5: 1e8032db1436184d5d93a0bf85fb419c
+      size: 2492225
     - path: artifacts/model/model.pkl
-      md5: 346085e40b8cf0389f3bb3fbb5690882
-      size: 3553847
+      md5: 95e4d3396776b56cf4b2d1fb47ed937c
+      size: 2934503
     - path: configs/config.yaml
       md5: 2f06fa75d45cd5316539b1631480774b
       size: 450
@@ -107,11 +107,11 @@ stages:
       size: 979
     outs:
     - path: prc.json
-      md5: c44224dc3fef9f075241b3f8f2843cb8
-      size: 130624
+      md5: f7f6cd3d4538f86bdb02b09530e35e68
+      size: 91743
     - path: roc.json
-      md5: b46679139eaaff0a0b0d40a451b7245a
-      size: 95593
+      md5: 1979f24aaec26443f5fce3bb84fc9105
+      size: 67904
     - path: scores.json
-      md5: 075b99c7b6e7123f84c0292a80876f0f
-      size: 75
+      md5: 263efecb2a742eb7f0f2ca34bdbe4c6e
+      size: 76
