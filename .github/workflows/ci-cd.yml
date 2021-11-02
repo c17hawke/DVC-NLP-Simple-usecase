@@ -5,21 +5,22 @@ on: [push]
 
 jobs:
   deploy-runner:
-  steps:
-    - uses: iterative/setup-cml@v1
-    - uses: actions/checkout@v2
-    - name: 'Deploy runner in EC2'
-      shell: bash
-      env:
-        REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        cml-runner \
-        --cloud aws \
-        --cloud-region us-west \
-        --cloud-type=m \
-        --labels=cml-runner 
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: iterative/setup-cml@v1
+      - uses: actions/checkout@v2
+      - name: 'Deploy runner in EC2'
+        shell: bash
+        env:
+          REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          cml-runner \
+          --cloud aws \
+          --cloud-region us-west \
+          --cloud-type=m \
+          --labels=cml-runner 
 
 
   model-training:
