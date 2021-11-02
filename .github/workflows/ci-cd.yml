@@ -4,18 +4,33 @@ name: train-NLP-ML-usecase
 on: [push]
 
 jobs:
-  run:
-    runs-on: [ubuntu-latest]
+  deploy-runner:
+  steps:
+    - uses: iterative/setup-cml@v1
+    - uses: actions/checkout@v2
+    - name: 'Deploy runner in EC2'
+      shell: bash
+      env:
+        REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        cml-runner \
+        --cloud aws \
+        --cloud-region us-west \
+        --cloud-type=m \
+        --labels=cml-runner 
+
+
+  model-training:
+    needs: deploy-runner
+    runs-on: [self-hosted, cml-runner]
+    container: docker://iterativeai/cml:0-dvc2-base1
     steps:
       - uses: actions/checkout@v2
-      - uses: iterative/setup-cml@v1
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.7'
-
-      - name: cml_run
+      - name: "Train my model"
         env:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           # Your ML workflow commands
           pip install --upgrade pip
@@ -26,7 +41,6 @@ jobs:
           echo "# REPORTS" >> report.md
           echo "## metrics" >> report.md
           cat scores.json >> report.md
-
           cml-send-comment report.md ## >> CML COMMAND USE TO COMMENT ON LAST COMMIT
 
 
